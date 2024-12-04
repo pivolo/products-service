@@ -110,7 +110,8 @@
                             <apiPackage>com.mycomp.products.api.v1</apiPackage>
                             <modelPackage>com.mycomp.products.api.v1.model</modelPackage>
                             <configOptions>
-                                <delegatePattern>true</delegatePattern>
+                                <interfaceOnly>true</interfaceOnly>
+                                <delegatePattern>false</delegatePattern>
                                 <useSpringBoot3>true</useSpringBoot3>
                                 <openApiNullable>false</openApiNullable>
                             </configOptions>
