@@ -1,14 +1,13 @@
-package com.mycomp.products.api.v1;
+package com.mycomp.products.infrastructure.inbound.rest.v1;
 
+import com.mycomp.products.api.v1.ProductsApi;
 import com.mycomp.products.api.v1.model.ProductsGet200ResponseInner;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 @RestController
-public class ProductsController implements  ProductsApi{
+public class ProductsController implements ProductsApi {
 
     @Override
     public ResponseEntity<List<ProductsGet200ResponseInner>> productsGet() {
