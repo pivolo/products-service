@@ -27,7 +27,6 @@ class ProductsControllerIT {
     @Autowired
     private MockMvc mvc;
 
-
     @Test
     void getProductsWithoutFiltering() throws Exception {
         mvc.perform(MockMvcRequestBuilders
