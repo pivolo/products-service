@@ -11,7 +11,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProductUseCase {
     private final ProductRepository productRepository;
-    public List<Product> getProducts(){
-        return productRepository.findAll();
+    public List<Product> findProducts(String category){
+        return productRepository.findAll(category);
     }
 }

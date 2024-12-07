@@ -28,14 +28,13 @@ class ProductControllerTest {
     public void beforeEach() {
         productController = new ProductController(productUseCase, productRestMapper);
     }
-
-
     @Test
-    void getProductsShouldReturnOk() {
+    void findShouldReturnOk() {
         // Given
-        given(productUseCase.getProducts()).willReturn(ProductMO.productList());
+        String category = "cat";
+        given(productUseCase.findProducts(category)).willReturn(ProductMO.productList());
         // When
-        ResponseEntity<List<ProductsGet200ResponseInner>> actual = productController.productsGet(null, null, null);
+        ResponseEntity<List<ProductsGet200ResponseInner>> actual = productController.productsGet(category, null, null);
         // Then
         assertThat(actual).isNotNull()
                 .extracting(ResponseEntity::getStatusCode)

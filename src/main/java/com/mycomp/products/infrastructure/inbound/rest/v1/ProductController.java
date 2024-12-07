@@ -17,7 +17,7 @@ public class ProductController implements ProductsApi {
 
     @Override
     public ResponseEntity<List<ProductsGet200ResponseInner>> productsGet(String category, String sort, String order) {
-        var products = productUseCase.getProducts();
+        var products = productUseCase.findProducts(category);
         return ResponseEntity.ok(productRestMapper.toDtos(products));
 
     }

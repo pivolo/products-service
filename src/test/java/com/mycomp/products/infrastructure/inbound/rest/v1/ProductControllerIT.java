@@ -12,7 +12,6 @@ import org.springframework.web.context.WebApplicationContext;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -33,10 +32,20 @@ class ProductControllerIT {
         mvc.perform(MockMvcRequestBuilders
                         .get("/products")
                         .accept(MediaType.APPLICATION_JSON))
-                .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(30)))
                 .andExpect(jsonPath("$[0].sku", is("SKU0001")));
+    }
+
+    @Test
+    void getProductsByCategory() throws Exception {
+        mvc.perform(MockMvcRequestBuilders
+                        .get("/products")
+                        .param("category", "Electronics")
+                        .accept(MediaType.APPLICATION_JSON))
+
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(10)));
     }
 
 }

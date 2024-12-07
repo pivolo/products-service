@@ -22,12 +22,13 @@ class ProductUseCaseTest {
     ProductUseCase productUseCase;
 
     @Test
-    void getProductsReturnsRepositoryProductsTest() {
+    void findProductsReturnsRepositoryProductsTest() {
         //Given
         List<Product> products = ProductMO.productList();
-        given(productRepository.findAll()).willReturn(products);
+        String category ="cat";
+        given(productRepository.findAll(category)).willReturn(products);
         //When
-        List<Product> actualProducts = productUseCase.getProducts();
+        List<Product> actualProducts = productUseCase.findProducts(category);
         //Then
         assertThat(actualProducts).hasSize(2).containsExactlyInAnyOrderElementsOf(products);
     }
