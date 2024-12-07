@@ -1,7 +1,7 @@
 package com.mycomp.products.infrastructure.inbound.rest.v1;
 import com.mycomp.products.api.v1.model.ProductsGet200ResponseInner;
 import com.mycomp.products.application.ProductUseCase;
-import com.mycomp.products.domain.ProductMO;
+import com.mycomp.products.domain.model.ProductMO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -19,14 +19,14 @@ class ProductControllerTest {
     @Mock
     private ProductUseCase productUseCase;
 
-    private ProductMapper productMapper = new ProductMapperImpl();
+    private final ProductRestMapper productRestMapper = new ProductRestMapperImpl();
 
     private ProductController productController;
 
 
     @BeforeEach
     public void beforeEach() {
-        productController = new ProductController(productUseCase, productMapper);
+        productController = new ProductController(productUseCase, productRestMapper);
     }
 
 

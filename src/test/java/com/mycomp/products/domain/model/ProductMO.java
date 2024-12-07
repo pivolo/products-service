@@ -1,8 +1,6 @@
-package com.mycomp.products.domain;
+package com.mycomp.products.domain.model;
 
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class ProductMO {
     public static List<Product> productList(){

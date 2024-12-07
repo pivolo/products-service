@@ -13,12 +13,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProductController implements ProductsApi {
     private final ProductUseCase productUseCase;
-    private final ProductMapper productMapper;
+    private final ProductRestMapper productRestMapper;
 
     @Override
     public ResponseEntity<List<ProductsGet200ResponseInner>> productsGet() {
         var products = productUseCase.getProducts();
-        return ResponseEntity.ok(productMapper.toDtos(products));
+        return ResponseEntity.ok(productRestMapper.toDtos(products));
 
     }
 
