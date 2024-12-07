@@ -2,7 +2,7 @@ package com.mycomp.products.infrastructure.outbound.repositories.jpa.dtos;
 
 import java.util.List;
 
-public class ProductDtoMO {
+public class ProductJpaDtoMO {
     public static List<ProductDto> getProductsDto() {
         return List.of(
                 new ProductDto("sku", 2.5F, "description", "cat"),

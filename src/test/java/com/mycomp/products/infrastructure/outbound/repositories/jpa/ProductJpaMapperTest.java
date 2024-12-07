@@ -2,7 +2,7 @@ package com.mycomp.products.infrastructure.outbound.repositories.jpa;
 
 import com.mycomp.products.domain.model.Product;
 import com.mycomp.products.infrastructure.outbound.repositories.jpa.dtos.ProductDto;
-import com.mycomp.products.infrastructure.outbound.repositories.jpa.dtos.ProductDtoMO;
+import com.mycomp.products.infrastructure.outbound.repositories.jpa.dtos.ProductJpaDtoMO;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -15,7 +15,7 @@ private final ProductJpaMapper productJpaMapper = new ProductJpaMapperImpl();
     @Test
     void toDomainShouldMapDtosTest() {
         //Given
-        List<ProductDto> productsDto = ProductDtoMO.getProductsDto();
+        List<ProductDto> productsDto = ProductJpaDtoMO.getProductsDto();
         //When
         List<Product> actualProducts = productJpaMapper.toDomain(productsDto);
         //Then
