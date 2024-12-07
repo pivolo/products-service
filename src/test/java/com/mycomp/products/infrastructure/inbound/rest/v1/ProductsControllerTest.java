@@ -35,7 +35,7 @@ class ProductControllerTest {
         // Given
         given(productUseCase.getProducts()).willReturn(ProductMO.productList());
         // When
-        ResponseEntity<List<ProductsGet200ResponseInner>> actual = productController.productsGet();
+        ResponseEntity<List<ProductsGet200ResponseInner>> actual = productController.productsGet(null, null, null);
         // Then
         assertThat(actual).isNotNull()
                 .extracting(ResponseEntity::getStatusCode)

@@ -10,6 +10,22 @@ paths:
     get:
       summary: Get a list of products
       description: Returns a list of products
+      parameters:
+        - in: query
+          name: category
+          schema:
+            type: string
+          description: Filter products by category
+        - in: query
+          name: sort
+          schema:
+            type: string
+          description: Sort products by field (e.g., sku, price, description, category, discount)
+        - in: query
+          name: order
+          schema:
+            type: string
+          description: Sort order (asc or desc)
       responses:
         '200':
           description: Successful response
