@@ -8,7 +8,7 @@ public record Product( String sku, Float price, String description, String categ
             return switch (this.category()){
                 case "Electronics" -> 15F;
                 case "Home & Kitchen" -> 25F;
-                default -> null;
+                default -> 0F;
             };
         }
     }
