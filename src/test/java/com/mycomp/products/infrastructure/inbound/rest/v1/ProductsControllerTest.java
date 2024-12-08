@@ -32,9 +32,11 @@ class ProductControllerTest {
     void findShouldReturnOk() {
         // Given
         String category = "cat";
-        given(productUseCase.findProducts(category)).willReturn(ProductMO.productList());
+        String sortField ="price";
+        String sortOrder ="desc";
+        given(productUseCase.findProducts(category, sortField, sortOrder)).willReturn(ProductMO.productList());
         // When
-        ResponseEntity<List<ProductsGet200ResponseInner>> actual = productController.productsGet(category, null, null);
+        ResponseEntity<List<ProductsGet200ResponseInner>> actual = productController.productsGet(category, sortField, sortOrder);
         // Then
         assertThat(actual).isNotNull()
                 .extracting(ResponseEntity::getStatusCode)

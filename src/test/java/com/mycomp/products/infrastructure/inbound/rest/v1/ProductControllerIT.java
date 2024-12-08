@@ -43,9 +43,22 @@ class ProductControllerIT {
                         .get("/products")
                         .param("category", "Electronics")
                         .accept(MediaType.APPLICATION_JSON))
-
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(10)));
+    }
+
+    @Test
+    void getProductsByCategorySortedAscByPriceDesc() throws Exception {
+        mvc.perform(MockMvcRequestBuilders
+                        .get("/products")
+                        .param("category", "Electronics")
+                        .param("sort", "price")
+                        .param("order", "desc")
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(10)))
+                .andExpect(jsonPath("$[0].sku", is("SKU0002")))
+                .andExpect(jsonPath("$[0].price", is(499.0)));
     }
 
 }
