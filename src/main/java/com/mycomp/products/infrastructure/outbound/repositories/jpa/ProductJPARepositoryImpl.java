@@ -9,6 +9,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+
+import static org.springframework.util.StringUtils.hasText;
+
 @Component
 @RequiredArgsConstructor
 public class ProductJPARepositoryImpl implements ProductRepository {
@@ -19,10 +22,15 @@ public class ProductJPARepositoryImpl implements ProductRepository {
         ProductDto product = new ProductDto();
         product.setCategory(category);
         Example<ProductDto> filterExample = Example.of(product);
-        Sort.Order order = "asc".equalsIgnoreCase(sortOrder)
-                ? Sort.Order.asc(sortField)
-                : Sort.Order.desc(sortField);
-        List<ProductDto> productsDto = productJpaRepository.findAll(filterExample, Sort.by(order));
+        Sort order;
+        if (!hasText(sortField) || !hasText(sortOrder)){
+            order = Sort.unsorted();
+        }
+        else{
+            order = "asc".equalsIgnoreCase(sortOrder)
+                ? Sort.by(Sort.Order.asc(sortField))
+                : Sort.by(Sort.Order.desc(sortField));}
+        List<ProductDto> productsDto = productJpaRepository.findAll(filterExample, order);
         return productJpaMapper.toDomain(productsDto);
     }
 }
