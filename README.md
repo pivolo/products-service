@@ -11,6 +11,8 @@ This repository implements a REST API for managing a list of products, showcasin
 * JUnit (for unit testing)
 * Mockito (for mocking dependencies)
 * Spring Test (for integration testing)
+* OpenAPI (for API documentation)
+* Maven openapi plugin for API code generation
 
 **Project Structure:**
 
@@ -24,6 +26,10 @@ This repository implements a REST API for managing a list of products, showcasin
 **DDD and Hexagonal Architecture Approximation:**
 
 This project aims to follow DDD principles by separating concerns: domain logic, application logic, and infrastructure. Additionally, it loosely couples the business core policies from external frameworks with a focus on ports and adapters for integration.
+
+**API Documentation with OpenAPI:**
+
+This project integrates SpringDoc OpenAPI to automatically generate comprehensive API documentation in OpenAPI 3.0 format. This documentation serves also as a contract to endpoint API code generation
 
 **Testing:**
 
