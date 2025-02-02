@@ -34,3 +34,16 @@ jobs:
         run: |
           mvn clean test -B -Dmaven.junit.parallel=true
           mvn clean install -B
+
+      - name: Check coverage
+        uses: coveralls-maven-plugin/coveralls-maven-plugin@v3
+        with:
+          goal: coveralls:check
+          config: |
+            {
+              "thresholds": {
+                "overall": {
+                  "minimum": 80
+                }
+              }
+            }
