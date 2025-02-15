@@ -42,10 +42,9 @@ jobs:
         run:
           mvn clean install -B
 
-      - name: Run tests with Maven
+      - name: Upload maven artifact
         uses: actions/upload-artifact@v4
         with:
           name: maven-build
           path: target/*.jar
           retention-days: 1
-          timeout-minutes: 10
