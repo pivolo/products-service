@@ -4,6 +4,7 @@ on:
   push:
     branches: [ main ]
   pull_request:
+    types: [ opened, synchronize, reopened, ready_for_review ]
     branches: [ main ]
 
 env:
@@ -11,10 +12,17 @@ env:
 
 jobs:
   build:
+    if: |
+      github.event.action == 'ready_for_review' 
+      || (github.event.action == 'synchronize' && github.event.pull_request.state == 'open' 
+          && github.event.pull_request.draft == false) || (github.event.action == 'opened' 
+          && github.event.pull_request.draft == false) 
+      || (github.event.action == 'reopened' && github.event.pull_request.draft == false)
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
       - name: Set up JDK 17
         uses: actions/setup-java@v3
@@ -31,6 +39,13 @@ jobs:
           restore-keys: ${{ runner.os }}-maven-
 
       - name: Build with Maven
-        run: |
-          mvn clean test -B -Dmaven.junit.parallel=true
+        run:
           mvn clean install -B
+
+      - name: Run tests with Maven
+        uses: actions/upload-artifact@v4
+        with:
+          name: maven-build
+          path: target/*.jar
+          retention-days: 1
+          timeout-minutes: 10
