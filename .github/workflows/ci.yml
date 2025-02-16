@@ -13,11 +13,15 @@ env:
 jobs:
   build:
     if: |
-      github.event.action == 'ready_for_review' 
-      || (github.event.action == 'synchronize' && github.event.pull_request.state == 'open' 
-          && github.event.pull_request.draft == false) || (github.event.action == 'opened' 
-          && github.event.pull_request.draft == false) 
-      || (github.event.action == 'reopened' && github.event.pull_request.draft == false)
+      (github.event_name == 'pull_request' 
+        && 
+         (github.event.action == 'ready_for_review' ||
+          github.event.action == 'synchronize' ||
+          github.event.action == 'opened' ||
+          github.event.action == 'reopened') &&
+         github.event.pull_request.draft == false) 
+      || (github.event_name == 'push')
+
     runs-on: ubuntu-latest
 
     steps:
