@@ -2,7 +2,6 @@ package com.mycomp.products.infrastructure.inbound.rest.v1;
 
 import com.mycomp.products.api.v1.model.ProductsGet200ResponseInner;
 import com.mycomp.products.application.ProductUseCase;
-import com.mycomp.products.domain.model.Product;
 import com.mycomp.products.domain.model.ProductMO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -76,7 +75,6 @@ class ProductControllerTest {
         then(productUseCase).should().findProducts(category, sortField, sortOrder);
     }
 
-    // Throws RuntimeException when ProductUseCase throws an exception
     @Test
     public void testProductsGetThrowsRuntimeException() {
         // Given
@@ -89,6 +87,21 @@ class ProductControllerTest {
         assertThatThrownBy(() -> controller.productsGet("Electronics", "price", "asc"))
                 .isInstanceOf(RuntimeException.class)
                 .hasMessageContaining("Database error");
+    }
+
+    @Test
+    void productsGet_NullProducts_ReturnsNoContent() {
+        // Arrange
+        String category = "electronics";
+        String sortField = "name";
+        String sortOrder = "asc";
+        given(productUseCase.findProducts(category, sortField, sortOrder)).willReturn(null);
+
+        // Act
+        ResponseEntity<List<ProductsGet200ResponseInner>> response = productController.productsGet(category, sortField, sortOrder);
+
+        // Assert
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);
     }
 
 
